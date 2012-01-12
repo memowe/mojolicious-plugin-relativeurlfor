@@ -22,7 +22,7 @@ sub register {
         return $url->to_rel($req_url) if $req_url->to_string;
 
         # change nothing without request url
-        return $url->to_abs;
+        return $url;
     };
 
     # register rel(ative)_url_for helpers
