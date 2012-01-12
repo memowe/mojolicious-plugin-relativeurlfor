@@ -1,0 +1,5 @@
+Revision history for Mojolicious-Plugin-RelativeUrlFor
+
+0.01    2012-01-12 17:30:00
+        First version with relative_url_for, rel_url_for helpers
+        and replace_url_for option
