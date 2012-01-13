@@ -17,9 +17,14 @@ sub register {
         my $url     = $url_for->($c, @_);
         my $req_url = $c->req->url;
 
-        # return relative version
-        # (relative to request url
-        return $url->to_rel($req_url) if $req_url->to_string;
+        # return relative version if request url exists
+        if ($req_url->to_string) {
+
+            # repair if empty
+            my $rel_url = $url->to_rel($req_url);
+            return Mojo::URL->new('./') unless $rel_url->to_string;
+            return $rel_url;
+        }
 
         # change nothing without request url
         return $url;
