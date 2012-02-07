@@ -10,3 +10,4 @@ MANIFEST*
 !MANIFEST.SKIP
 *META.*
 *.sw[a-p]
+Mojolicious-Plugin-RelativeUrlFor-*.tar.gz
