@@ -23,7 +23,7 @@ Basic usage:
     $rel_url = $self->rel_url_for('foo', bar => 'baz');
 
     # In your templates:
-    <%= url_for 'foo', bar => 'baz' %>
+    <%= rel_url_for 'foo', bar => 'baz' %>
 
 For more informations, see the inlined POD documentation in
 lib/Mojolicious/Plugin/RelativeUrlFor.pm or view it in the terminal with
