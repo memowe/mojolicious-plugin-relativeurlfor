@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::RelativeUrlFor;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub register {
     my ($self, $app, $conf) = @_;
