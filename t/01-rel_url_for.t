@@ -21,7 +21,7 @@ get '/*p' => sub {
     my $self = shift;
     my $new  = $follow{$self->param('p')};
     my $url  = $self->rel_url_for('foo', p => $new);
-    $self->render_text($url);
+    $self->render(text => $url);
 } => 'foo';
 
 # create tester
