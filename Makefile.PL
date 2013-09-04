@@ -7,4 +7,9 @@ WriteMakefile(
     AUTHOR          => 'Mirko Westermeier <mail@memowe.de>',
     VERSION_FROM    => 'lib/Mojolicious/Plugin/RelativeUrlFor.pm',
     PREREQ_PM       => {'Mojolicious' => 4},
+    META_MERGE      => {
+        resources => {
+            repository => 'https://github.com/memowe/mojolicious-plugin-relativeurlfor',
+        },
+    },
 );
