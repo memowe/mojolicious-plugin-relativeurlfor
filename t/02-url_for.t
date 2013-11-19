@@ -26,8 +26,8 @@ $t->get_ok('/foo/bar/baz')->status_is(200)
   ->text_is('#url_for',         '../b')
   ->text_is('#ren_rel_url_for', '../c')
   ->text_is('#ren_url_for',     '../d');
-is($t->tx->res->dom->at('#link_to a')->attrs->{href}, '../e', 'link_to');
-is($t->tx->res->dom->at('#form_for')->attrs->{action}, '../f', 'form_for');
+is($t->tx->res->dom->at('#link_to a')->attr('href'), '../e', 'link_to');
+is($t->tx->res->dom->at('#form_for')->attr('action'), '../f', 'form_for');
 
 __DATA__
 @@foo.html.ep
