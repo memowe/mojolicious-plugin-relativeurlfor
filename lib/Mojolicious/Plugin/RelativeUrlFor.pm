@@ -1,12 +1,41 @@
 package Mojolicious::Plugin::RelativeUrlFor;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
+
+# function version of the deleted Mojo::URL::to_rel method
+# from Mojolicious repository revision 551a31
+sub url_to_rel {
+    my $self = shift;
+
+    my $rel = $self->clone;
+    return $rel unless $rel->is_abs;
+
+    # Scheme and authority
+    my $base = shift || $rel->base;
+    $rel->base($base)->scheme(undef);
+    $rel->userinfo(undef)->host(undef)->port(undef) if $base->authority;
+
+    # Path
+    my @parts       = @{$rel->path->parts};
+    my $base_path   = $base->path;
+    my @base_parts  = @{$base_path->parts};
+    pop @base_parts unless $base_path->trailing_slash;
+    while (@parts && @base_parts && $parts[0] eq $base_parts[0]) {
+        shift @$_ for \@parts, \@base_parts;
+    }
+    my $path = $rel->path(Mojo::Path->new)->path;
+    $path->leading_slash(1) if $rel->authority;
+    $path->parts([('..') x @base_parts, @parts]);
+    $path->trailing_slash(1) if $self->path->trailing_slash;
+
+    return $rel;
+}
 
 sub register {
     my ($self, $app, $conf) = @_;
 
-    # url_for helper
+    # url_for helper backup
     my $url_for = *Mojolicious::Controller::url_for{CODE};
 
     # helper sub ref
@@ -21,7 +50,7 @@ sub register {
         if ($req_url->to_string) {
 
             # repair if empty
-            my $rel_url = $url->to_rel($req_url);
+            my $rel_url = url_to_rel($url, $req_url);
             return Mojo::URL->new('./') unless $rel_url->to_string;
             return $rel_url;
         }
@@ -60,9 +89,9 @@ Mojolicious::Plugin::RelativeUrlFor - relative links in Mojolicious, really.
 =head1 DESCRIPTION
 
 This Mojolicious plugin adds a new helper to your web app: C<relative_url_for>,
-together with its short alias C<rel_url_for>. Mojo's URL objects already have a
-method for this, but to get really relative URLs like I<../foo.html> you need
-to add the request url like this:
+together with its short alias C<rel_url_for>. Mojo's URL objects already had a
+method for this before 4.90, but to get really relative URLs like I<../foo.html>
+you had to add the request url like this:
 
     my $url     = $self->url_to('foo', bar => 'baz');
     my $rel_url = $url->to_rel($self->req->url);
