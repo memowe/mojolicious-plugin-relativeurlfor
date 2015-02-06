@@ -1,5 +1,8 @@
 Revision history for Mojolicious-Plugin-RelativeUrlFor
 
+0.05    2015-02-06 15:50:00
+        added a Mojo::URL::to_rel replacement
+
 0.04    2013-11-19 09:29:00
         Mojolicious 4.20 compatibility (tests only)
 
