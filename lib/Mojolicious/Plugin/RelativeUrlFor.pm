@@ -102,6 +102,6 @@ L<http://github.com/memowe/mojolicious-plugin-relativeurlfor/issues>
 
 =head1 AUTHOR AND LICENSE
 
-Copyright Mirko Westermeier E<lt>mail@memowe.deE<gt>
+Copyright Mirko Westermeier E<lt>mirko@westermeier.deE<gt>
 
 This software is released under the MIT license. See MIT-LICENSE for details.

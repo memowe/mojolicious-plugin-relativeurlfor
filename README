@@ -30,6 +30,6 @@ lib/Mojolicious/Plugin/RelativeUrlFor.pm or view it in the terminal with
     
     perldoc Mojolicious::Plugin::RelativeUrlFor
 
-Copyright Mirko Westermeier <mail@memowe.de>
+Copyright Mirko Westermeier <mirko@westermeier.de>
 
 This software is released under the MIT license. See MIT-LICENSE for details.
