@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::RelativeUrlFor;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.05';
+our $VERSION = '0.051';
 
 # function version of the deleted Mojo::URL::to_rel method
 # from Mojolicious repository revision 551a31
