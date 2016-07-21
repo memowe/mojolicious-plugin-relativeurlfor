@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::RelativeUrlFor;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.051';
+our $VERSION = '0.052';
 
 # function version of the deleted Mojo::URL::to_rel method
 # from Mojolicious repository revision 551a31
@@ -11,10 +11,10 @@ sub url_to_rel {
     my $rel = $self->clone;
     return $rel unless $rel->is_abs;
 
-    # Scheme and authority
+    # Scheme and host
     my $base = shift || $rel->base;
     $rel->base($base)->scheme(undef);
-    $rel->userinfo(undef)->host(undef)->port(undef) if $base->authority;
+    $rel->userinfo(undef)->host(undef)->port(undef) if $base->host;
 
     # Path
     my @parts       = @{$rel->path->parts};
@@ -25,7 +25,7 @@ sub url_to_rel {
         shift @$_ for \@parts, \@base_parts;
     }
     my $path = $rel->path(Mojo::Path->new)->path;
-    $path->leading_slash(1) if $rel->authority;
+    $path->leading_slash(1) if $rel->host;
     $path->parts([('..') x @base_parts, @parts]);
     $path->trailing_slash(1) if $self->path->trailing_slash;
 
